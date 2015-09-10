@@ -47,6 +47,12 @@ define([
                         return data.baseUrl.replace(/\/$/, '') + '/' + url.toString().replace(/^\.\//, '').replace(/^\//, '');
                     }
 
+                    //when baseUrl uses the url as a query param
+                    if(data.encode || (data.baseUrl.indexOf('?') > -1 && /=$/.test(data.baseUrl))){
+
+                        return data.baseUrl + encodeURIComponent(url.toString());
+                    }
+
                     return data.baseUrl + url.toString().replace(/^\.?\//, '');
                 }
             }
